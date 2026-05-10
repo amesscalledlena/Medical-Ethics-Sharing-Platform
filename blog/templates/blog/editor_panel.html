@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Editor approval queue — review pending submissions and decide whether to publish.">
+  <title>Editor Panel — Medica·Ethica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../../static/blog/css/styles.css">
+</head>
+<body data-page="editor">
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="navbar" role="banner">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo" aria-label="Medica·Ethica home">Medica<span class="dot">·</span>Ethica</a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" data-nav="home">Home</a></li>
+          <li><a href="approved_posts.html" data-nav="posts">Browse Posts</a></li>
+          <li><a href="editor_panel.html" data-nav="editor">Editor Panel</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a href="login.html" class="btn btn-ghost">Log In</a>
+        <a href="create_post.html" class="btn btn-primary">Create Post</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" hidden>
+      <a href="index.html">Home</a>
+      <a href="approved_posts.html">Browse Posts</a>
+      <a href="editor_panel.html">Editor Panel</a>
+      <a href="login.html" class="btn btn-outline">Log In</a>
+      <a href="create_post.html" class="btn btn-primary">Create Post</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-header">
+      <div class="container reveal">
+        <span class="eyebrow">Editor panel</span>
+        <h1>Review queue <span style="font-family:var(--font-body); font-size:1rem; font-weight:700; color:var(--color-accent); background:var(--color-secondary); padding:6px 14px; border-radius:var(--radius-pill); vertical-align:middle; margin-left:var(--s-1);"><span id="reviewCount">0</span> pending</span></h1>
+        <p>Approve, reject, or preview submissions waiting on editorial review. Approved posts move to the public Browse page; rejected ones stay only with their author.</p>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div id="reviewList" class="review-list" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Medica·Ethica</h4>
+          <p>A quiet space to share and reflect on the moral landscape of modern medicine, curated with editorial care.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="approved_posts.html?cat=Films">Films</a></li>
+            <li><a href="approved_posts.html?cat=Theatre+Plays">Theatre Plays</a></li>
+            <li><a href="approved_posts.html?cat=Literary+Texts">Literary Texts</a></li>
+            <li><a href="approved_posts.html?cat=Clinical+Ethics+Cases">Clinical Ethics Cases</a></li>
+            <li><a href="approved_posts.html?cat=Ethics+News">Ethics News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="create_post.html">Submit a Post</a></li>
+            <li><a href="editor_panel.html">Editor Panel</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#main">Our Mission</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="year">2026</span> Medica·Ethica. Crafted for thoughtful discussion. All shared works belong to their respective authors.
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../static/blog/js/main.js"></script>
+</body>
+</html>
