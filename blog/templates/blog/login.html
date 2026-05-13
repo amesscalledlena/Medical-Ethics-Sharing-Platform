@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +48,12 @@
 
         <div class="form-success" role="status"></div>
 
-        <form id="loginForm" novalidate>
+        <form id="loginForm" method="POST" novalidate>
+          {% csrf_token %}
+
           <div class="form-row">
             <label for="identifier">Username or email</label>
-            <input id="identifier" name="identifier" type="text" autocomplete="username" required aria-describedby="identifier-err">
+            <input id="identifier" name="username" type="text" autocomplete="username" required aria-describedby="identifier-err">
             <span id="identifier-err" class="err-msg"></span>
           </div>
 
