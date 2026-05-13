@@ -41,12 +41,15 @@ def register_view (request):
         u_name = request.POST.get('username')
         email = request.POST.get('email', '')
         p_word = request.POST.get('password')
+        p_word_confirm = request.POST.get('confirm')
 
-        if User.objects.filter(username=u_name).exists():
+        if p_word != p_word_confirm:
+            error_message = "Passwords do not match. Please try again."
+
+        elif User.objects.filter(username=u_name).exists():
             error_message = "This username is already taken. Please choose another."
         else:
             user = User.objects.create_user(username=u_name, email=email, password=p_word)
-
             login(request, user)
             return redirect('home')
         
