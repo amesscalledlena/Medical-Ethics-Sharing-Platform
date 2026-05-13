@@ -1,10 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 
 def home_view (request):
     return render (request, 'blog/index.html')
 
 def login_view (request):
-    return render (request, 'blog/login.html')
+    if request.method == 'POST':
+        u_name = request.POST.get('username')
+        p_word = request.POST.get('password')
+
+        user = authenticate(request, username=u_name, password=p_word)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            pass 
+    return render(request, 'blog/login.html')
+
 
 def approved_posts_view (request):
     return render (request, 'blog/approved_posts.html')
