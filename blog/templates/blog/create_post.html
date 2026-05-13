@@ -48,7 +48,8 @@
 
         <div class="form-success" role="status" tabindex="-1"></div>
 
-        <form id="createPostForm" novalidate>
+        <form method="POST" novalidate>
+          {% csrf_token %}
           <div class="form-row">
             <label for="title">Title</label>
             <input id="title" name="title" type="text" required minlength="6" maxlength="200" placeholder="e.g. Wit and the Final Conversation">
@@ -58,13 +59,13 @@
           <div class="form-row">
             <label for="category">Category</label>
             <select id="category" name="category" required>
-              <option value="">— Choose a category —</option>
-              <option value="Films">Films</option>
-              <option value="Theatre Plays">Theatre Plays</option>
-              <option value="Literary Texts">Literary Texts</option>
-              <option value="Clinical Ethics Cases">Clinical Ethics Cases</option>
-              <option value="Ethics News">Ethics News</option>
-            </select>
+              <option value="" disabled selected>Select a category</option>
+              
+              {% for cat in categories %}
+                  <option value="{{ cat.id }}">{{ cat.name }}</option>
+              {% endfor %}
+              
+            </select> 
             <span class="err-msg"></span>
           </div>
 

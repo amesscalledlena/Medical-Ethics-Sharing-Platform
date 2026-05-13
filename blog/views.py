@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Post, Category
 
 def home_view (request):
     return render (request, 'blog/index.html')
@@ -26,7 +27,30 @@ def approved_posts_view (request):
     return render (request, 'blog/approved_posts.html')
 
 def create_post_view (request):
-    return render(request, 'blog/create_post.html')
+    
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    if request.method == "POST":
+        p_title = request.POST.get('title')
+        p_content = request.POST.get('content')
+        p_link = request.POST.get('link')
+        cat_id = request.POST.get('category')
+
+        selected_category = Category.objects.get(id=cat_id)
+
+        Post.objects.create(
+            title=p_title,
+            content=p_content,
+            link=p_link,
+            category=selected_category,
+            author=request.user
+        )
+
+        return redirect('home')
+    
+    all_categories = Category.objects.all()
+    return render(request, 'blog/create_post.html', {'categories': all_categories})
 
 def editor_panel_view (request):
     return render(request, 'blog/editor_panel.html')
