@@ -15,8 +15,8 @@ def login_view (request):
             login(request, user)
             return redirect('home')
         else:
-            pass 
-    return render(request, 'blog/login.html')
+            error_message = "Invalid username or password. Please try again."
+    return render(request, 'blog/login.html', {'error': error_message})
 
 
 def approved_posts_view (request):
