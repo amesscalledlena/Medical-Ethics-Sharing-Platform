@@ -48,7 +48,13 @@
 
         <div class="form-success" role="status"></div>
 
-        <form id="registerForm" novalidate>
+        {% if error %}
+          <p style="color: red; font-weight: bold; margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
+        <form novalidate>
+          {% csrf_token %}
+
           <div class="form-row">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" autocomplete="username" required minlength="3" aria-describedby="username-err username-hint">
