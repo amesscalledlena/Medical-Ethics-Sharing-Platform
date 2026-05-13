@@ -530,8 +530,8 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
     renderPostDetail();
     renderEditorPanel();
     setupReveal();
-    validateRegister();
-    validateLogin();
-    validateCreatePost();
+    //validateRegister();
+    //validateLogin();
+    //validateCreatePost();
   });
 })();

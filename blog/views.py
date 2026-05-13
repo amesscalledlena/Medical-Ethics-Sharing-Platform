@@ -5,6 +5,8 @@ def home_view (request):
     return render (request, 'blog/index.html')
 
 def login_view (request):
+    error_message = None
+    
     if request.method == 'POST':
         u_name = request.POST.get('username')
         p_word = request.POST.get('password')
