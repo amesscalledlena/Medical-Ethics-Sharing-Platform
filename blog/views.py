@@ -23,6 +23,11 @@ def login_view (request):
     return render(request, 'blog/login.html', {'error': error_message})
 
 
+def logout_view (request):
+    logout(request)
+    return redirect('home')
+
+
 def approved_posts_view (request):
     return render (request, 'blog/approved_posts.html')
 

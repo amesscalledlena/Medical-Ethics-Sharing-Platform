@@ -1,4 +1,4 @@
-/* =================================================================
+﻿/* =================================================================
    Medical Ethics Sharing Platform — Front-end behavior
    - Mobile menu (with focus management + ESC to close)
    - Reveal-on-scroll via IntersectionObserver
@@ -109,6 +109,24 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
       submitted: "2026-05-06"
     }
   ];
+
+  /* ---------------- Approved-posts store (persists across pages) ---------------- */
+  const APPROVED_KEY = 'asclepia.approvedPosts';
+  function loadApproved() {
+    try {
+      const raw = localStorage.getItem(APPROVED_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (_) { return []; }
+  }
+  function saveApproved(list) {
+    try { localStorage.setItem(APPROVED_KEY, JSON.stringify(list)); } catch (_) {}
+  }
+  function allPosts() {
+    const extras = loadApproved();
+    const seen = new Set(POSTS.map(p => p.id));
+    return POSTS.concat(extras.filter(p => !seen.has(p.id)));
+  }
 
   /* ---------------- Helpers ---------------- */
   function formatDate(iso) {
@@ -244,7 +262,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
   function renderHomePosts() {
     const grid = document.getElementById('homePosts');
     if (!grid) return;
-    const sorted = [...POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+    const sorted = allPosts().sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
     grid.innerHTML = sorted.map(postCardHTML).join('');
   }
 
@@ -258,7 +276,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
 
     function paint() {
       const q = (search && search.value || '').trim().toLowerCase();
-      let list = POSTS.slice();
+      let list = allPosts();
       if (activeCat && activeCat !== 'All') {
         list = list.filter(p => p.category === activeCat);
       }
@@ -300,12 +318,13 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
     const root = document.getElementById('postDetail');
     if (!root) return;
     const id = parseInt(getQuery('id'), 10);
-    const post = POSTS.find(p => p.id === id) || POSTS[0];
+    const pool = allPosts();
+    const post = pool.find(p => p.id === id) || pool[0];
     if (!post) {
       root.innerHTML = '<div class="empty-state">Post not found.</div>';
       return;
     }
-    document.title = `${post.title} — Medica·Ethica`;
+    document.title = `${post.title} — Asclepia`;
     root.innerHTML = `
       <a href="approved_posts.html" class="back-link">← Back to all posts</a>
       <span class="post-tag">${escapeHTML(post.category)}</span>
@@ -367,11 +386,47 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
       if (action === 'approve') {
         item.classList.remove('is-rejected');
         item.classList.add('is-approved', 'is-handled');
-        if (badge) badge.textContent = 'Approved';
+        if (badge) badge.textContent = 'Approved — moving to Browse';
+
+        const id = item.dataset.id;
+        const pending = PENDING.find(p => String(p.id) === String(id));
+        if (pending) {
+          const stored = loadApproved();
+          if (!stored.some(p => p.id === pending.id)) {
+            stored.push({
+              id: pending.id,
+              title: pending.title,
+              fullText: pending.fullText,
+              link: pending.link,
+              category: pending.category,
+              author: pending.author,
+              date: pending.submitted || new Date().toISOString().slice(0, 10)
+            });
+            saveApproved(stored);
+          }
+        }
+
+        requestAnimationFrame(() => item.classList.add('is-fading-out'));
+        const remove = () => {
+          if (!item.parentNode) return;
+          item.parentNode.removeChild(item);
+          refreshCount();
+        };
+        item.addEventListener('transitionend', remove, { once: true });
+        setTimeout(remove, 8000);
       } else if (action === 'reject') {
         item.classList.remove('is-approved');
         item.classList.add('is-rejected', 'is-handled');
         if (badge) badge.textContent = 'Rejected';
+
+        requestAnimationFrame(() => item.classList.add('is-fading-out'));
+        const remove = () => {
+          if (!item.parentNode) return;
+          item.parentNode.removeChild(item);
+          refreshCount();
+        };
+        item.addEventListener('transitionend', remove, { once: true });
+        setTimeout(remove, 8000);
       } else if (action === 'preview') {
         const id = item.dataset.id;
         const post = PENDING.find(p => String(p.id) === String(id));

@@ -1,25 +1,30 @@
-/* =================================================================
+  /* =================================================================
    Medical Ethics Sharing Platform — Design System
    Mobile-first. WCAG AA contrast. Reduced-motion friendly.
    ================================================================= */
 
 :root {
-  /* Palette */
-  --color-primary: #D9D0C1;        /* Sand */
-  --color-secondary: #EFEADD;      /* Light Creme */
-  --color-bg: #FDFBF7;             /* Ultra Light Creme */
-  --color-text: #3A352F;           /* Dark Charcoal/Brown */
-  --color-text-soft: #6B635A;      /* Muted body text */
-  --color-accent: #8C7A6B;         /* Deep Warm Sand */
-  --color-border: rgba(58, 53, 47, 0.08);
+  /* Palette — Cranberry / Beige / Plum / Taupe / Ivory */
+  --color-primary: #9D7960;        /* Taupe */
+  --color-secondary: #FEEFDC;      /* Beige */
+  --color-bg: #FFF1E9;             /* Ivory */
+  --color-text: #3F1116;           /* Cranberry (dark text) */
+  --color-text-soft: #64343C;      /* Muted plum-brown body text */
+  --color-accent: #beb6b8;         /* Plum */
+  --color-dark: #3F1116;           /* Cranberry — dark sections */
+  --color-dark-2: #64343C;         /* Plum — dark sections alt */
+  --color-on-dark: #FEEFDC;        /* Beige text on dark */
+  --color-on-dark-soft: rgba(254, 239, 220, 0.75);
+  --color-border: rgba(63, 17, 22, 0.10);
+  --color-border-dark: rgba(254, 239, 220, 0.18);
   --color-success: #4F6F3F;
   --color-danger: #B94A48;
 
   /* Shadow */
-  --shadow-sm: 0 1px 2px rgba(58, 53, 47, 0.04);
-  --shadow-md: 0 4px 14px rgba(58, 53, 47, 0.06);
-  --shadow-lg: 0 8px 28px rgba(58, 53, 47, 0.08);
-  --shadow-hover: 0 14px 32px rgba(58, 53, 47, 0.14);
+  --shadow-sm: 0 1px 2px rgba(63, 17, 22, 0.05);
+  --shadow-md: 0 4px 14px rgba(63, 17, 22, 0.08);
+  --shadow-lg: 0 8px 28px rgba(63, 17, 22, 0.10);
+  --shadow-hover: 0 14px 32px rgba(63, 17, 22, 0.18);
 
   /* Geometry */
   --radius: 8px;
@@ -197,7 +202,7 @@ a:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253, 251, 247, 0.85);
+  background: rgba(255, 241, 233, 0.85);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--color-border);
@@ -306,34 +311,57 @@ a:focus-visible {
 body.no-scroll { overflow: hidden; }
 
 /* -------- Hero -------- */
-.hero { padding: var(--s-6) 0 var(--s-5); }
+.hero {
+  padding: var(--s-6) 0 var(--s-5);
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-2) 100%);
+  color: var(--color-on-dark);
+}
 .hero-grid {
   display: grid;
   gap: var(--s-4);
   align-items: center;
 }
+.hero h1, .hero h2, .hero h3 { color: var(--color-on-dark); }
 .hero .eyebrow {
   display: inline-block;
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-secondary);
   margin-bottom: var(--s-2);
 }
 .hero h1 { margin-bottom: var(--s-2); }
 .hero p.lead {
   font-size: 1.125rem;
-  color: var(--color-text-soft);
+  color: var(--color-on-dark-soft);
   margin-bottom: var(--s-3);
   max-width: 38rem;
   line-height: 1.65;
 }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s-1); }
+.hero .btn-primary {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-dark);
+}
+.hero .btn-primary:hover {
+  background: var(--color-bg);
+  border-color: var(--color-bg);
+  color: var(--color-dark);
+}
+.hero .btn-outline {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+.hero .btn-outline:hover {
+  background: var(--color-secondary);
+  color: var(--color-dark);
+}
 .hero-illustration {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   display: grid;
@@ -344,10 +372,10 @@ body.no-scroll { overflow: hidden; }
   content: '';
   position: absolute;
   inset: -40%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, rgba(255,241,233,0.55), transparent 60%);
   pointer-events: none;
 }
-.hero-illustration svg { width: 62%; height: auto; position: relative; color: var(--color-text); }
+.hero-illustration svg { width: 62%; height: auto; position: relative; color: var(--color-dark); }
 
 /* -------- Section -------- */
 .section { padding: var(--s-6) 0; }
@@ -400,8 +428,8 @@ body.no-scroll { overflow: hidden; }
   height: 52px;
   display: grid;
   place-items: center;
-  background: var(--color-bg);
-  color: var(--color-accent);
+  background: #b08968;
+  color: #ffffff;
   border-radius: var(--radius);
 }
 .cat-icon svg { width: 26px; height: 26px; }
@@ -769,10 +797,11 @@ body.no-scroll { overflow: hidden; }
 
 /* -------- Footer -------- */
 .footer {
-  background: var(--color-secondary);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
   margin-top: var(--s-7);
   padding: var(--s-5) 0 var(--s-3);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-dark);
 }
 .footer-grid {
   display: grid;
@@ -785,18 +814,18 @@ body.no-scroll { overflow: hidden; }
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-secondary);
   margin-bottom: var(--s-2);
 }
-.footer-col p { color: var(--color-text-soft); font-size: 0.92rem; }
+.footer-col p { color: var(--color-on-dark-soft); font-size: 0.92rem; }
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-col a { color: var(--color-text); font-size: 0.92rem; }
-.footer-col a:hover { color: var(--color-accent); }
+.footer-col a { color: var(--color-on-dark); font-size: 0.92rem; }
+.footer-col a:hover { color: var(--color-secondary); }
 .footer-bottom {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-dark);
   padding-top: var(--s-3);
   font-size: 0.85rem;
-  color: var(--color-text-soft);
+  color: var(--color-on-dark-soft);
   text-align: center;
 }
 

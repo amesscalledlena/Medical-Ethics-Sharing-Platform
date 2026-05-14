@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Browse editor-approved posts on medical ethics — films, plays, literary texts, clinical cases, and news.">
-  <title>Browse Posts — Medica·Ethica</title>
+  <title>Browse — Asclepia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@500;600;700&display=swap">
@@ -15,16 +15,16 @@
 
   <header class="navbar" role="banner">
     <div class="container nav-inner">
-      <a href="index.html" class="logo" aria-label="Medica·Ethica home">Medica<span class="dot">·</span>Ethica</a>
+      <a href="index.html" class="logo" aria-label="Asclepia home">Asclepia</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
           <li><a href="index.html" data-nav="home">Home</a></li>
-          <li><a href="approved_posts.html" data-nav="posts">Browse Posts</a></li>
-          <li><a href="editor_panel.html" data-nav="editor">Editor Panel</a></li>
+          <li><a href="approved_posts.html" data-nav="posts">Browse</a></li>
+          {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html" data-nav="editor">Editor Panel</a></li>{% endif %}
         </ul>
       </nav>
       <div class="nav-cta">
-        <a href="login.html" class="btn btn-ghost">Log In</a>
+        {% if user.is_authenticated %}<a href="logout.html" class="btn btn-ghost">Log Out</a>{% else %}<a href="login.html" class="btn btn-ghost">Log In</a>{% endif %}
         <a href="create_post.html" class="btn btn-primary">Create Post</a>
       </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
@@ -33,9 +33,9 @@
     </div>
     <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" hidden>
       <a href="index.html">Home</a>
-      <a href="approved_posts.html">Browse Posts</a>
-      <a href="editor_panel.html">Editor Panel</a>
-      <a href="login.html" class="btn btn-outline">Log In</a>
+      <a href="approved_posts.html">Browse</a>
+      {% if user.is_authenticated and user.is_superuser %}<a href="editor_panel.html">Editor Panel</a>{% endif %}
+      {% if user.is_authenticated %}<a href="logout.html" class="btn btn-outline">Log Out</a>{% else %}<a href="login.html" class="btn btn-outline">Log In</a>{% endif %}
       <a href="create_post.html" class="btn btn-primary">Create Post</a>
     </div>
   </header>
@@ -73,7 +73,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4>Medica·Ethica</h4>
+          <h4>Asclepia</h4>
           <p>A quiet space to share and reflect on the moral landscape of modern medicine, curated with editorial care.</p>
         </div>
         <div class="footer-col">
@@ -89,10 +89,10 @@
         <div class="footer-col">
           <h4>Account</h4>
           <ul>
-            <li><a href="login.html">Log In</a></li>
+            {% if user.is_authenticated %}<li><a href="logout.html">Log Out</a></li>{% else %}<li><a href="login.html">Log In</a></li>{% endif %}
             <li><a href="register.html">Register</a></li>
             <li><a href="create_post.html">Submit a Post</a></li>
-            <li><a href="editor_panel.html">Editor Panel</a></li>
+            {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html">Editor Panel</a></li>{% endif %}
           </ul>
         </div>
         <div class="footer-col">
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © <span id="year">2026</span> Medica·Ethica. Crafted for thoughtful discussion. All shared works belong to their respective authors.
+        © <span id="year">2026</span> Asclepia. Crafted for thoughtful discussion. All shared works belong to their respective authors.
       </div>
     </div>
   </footer>
