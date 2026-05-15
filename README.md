@@ -66,6 +66,11 @@ Key features:
 
 7. Open your browser and visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
+## AI Tools Usage
+
+- **Gemini:** Used to help guide us with the project structure and steps.
+- **Claude:** Used to assist with front end development, code edits, bug fixes, and refining the project's documentation.
+
 ## Task Distribution
 
 The work was divided between two contributors based on the commit history of this repository.
@@ -91,6 +96,6 @@ The work was divided between two contributors based on the commit history of thi
 - Updated the login functionality and implemented Editor Panel access control
 - Added the project `README.md`
 - Small aesthetic touch-ups and fixes:
-  - Added a category seed migration (`blog/migrations/0002_seed_categories.py`)
-  - Minor adjustment to the initial migration (`blog/migrations/0001_initial.py`)
+  - Added a category seed migration
+  - Minor adjustment to the initial migration 
   - CSS tweaks in `blog/static/blog/css/styles.css`
