@@ -558,6 +558,11 @@ body.no-scroll { overflow: hidden; }
   width: 100%;
   transition: var(--transition);
 }
+.form-row select option {
+  padding: 10px 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
 .form-row textarea { min-height: 200px; resize: vertical; line-height: 1.65; }
 .form-row input::placeholder,
 .form-row textarea::placeholder {

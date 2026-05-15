@@ -82,8 +82,11 @@ The work was divided between two contributors based on the commit history of thi
   - Finished login logic and resolved related errors
 - Built the registration functionality (multi-stage: halfway → finished)
 - Built the create-post feature and fixed post-saving bugs
+- Built the approved post view, editor panel view, and post detail view, and fixed HTML bugs
+- Fixed the relative links error
 
 ### boodl3 (`boodle.doobee@gmail.com`)
 - Part 2 — Phase 1: Foundation and Django Setup
 - Part 2 — Phase 2: Frontend Setup (templates, layout, static assets)
 - Updated the login functionality and implemented Editor Panel access control
+- Added the project `README.md`
