@@ -47,7 +47,10 @@
         <p class="form-sub">Tell the community about a work, case, or news item that helped you think about a question in medical ethics. An editor will review it before it goes live — usually within 48 hours.</p>
 
         <div class="form-success" role="status" tabindex="-1"></div>
-
+        
+        {% if error %} 
+          <p style="color:red;">{{ error }}</p> 
+        {% endif %}
         <form method="POST" novalidate>
           {% csrf_token %}
           <div class="form-row">

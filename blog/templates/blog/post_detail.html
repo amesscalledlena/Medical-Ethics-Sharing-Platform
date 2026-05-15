@@ -41,7 +41,31 @@
   </header>
 
   <main id="main">
-    <article id="postDetail" class="post-detail reveal" aria-live="polite"></article>
+    <article class="post-detail container" style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 8px; border: 1px solid #ddd;">
+        <span style="display: inline-block; padding: 5px 10px; background: var(--color-secondary); color: var(--color-accent); font-weight: bold; border-radius: 20px; font-size: 0.85rem; margin-bottom: 15px;">
+            {{ post.category.name }}
+        </span>
+        
+        <h1 style="margin-top: 0;">{{ post.title }}</h1>
+        
+        <p style="color: #666; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px;">
+            Shared by <strong>{{ post.author.username }}</strong>
+        </p>
+        
+        <div style="font-size: 1.1rem; line-height: 1.8; color: #333;">
+            <p>{{ post.content }}</p>
+        </div>
+        
+        {% if post.link %}
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid var(--color-primary);">
+            <strong>Source Link:</strong> <a href="{{ post.link }}" target="_blank" style="color: var(--color-primary); text-decoration: underline;">{{ post.link }}</a>
+        </div>
+        {% endif %}
+        
+        <div style="margin-top: 40px;">
+            <a href="{% url 'approved_posts' %}" class="btn btn-outline">&larr; Back to Browse</a>
+        </div>
+    </article>
   </main>
 
   <footer class="footer" role="contentinfo">

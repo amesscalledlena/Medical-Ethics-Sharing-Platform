@@ -138,7 +138,29 @@
           <h2 id="recentHeading">Reflections worth your time</h2>
           <p>Editor-reviewed contributions from the community, ordered by publication date.</p>
         </header>
-        <div id="homePosts" class="posts-grid" aria-live="polite"></div>
+        <div class="posts-grid">
+            {% for post in posts %}
+                <article style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: white; margin-bottom: 20px;">
+                    <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); font-weight: bold;">
+                        {{ post.category.name }}
+                    </span>
+                    <h3 style="margin: 10px 0;">
+                        <a href="{% url 'post_detail' post.id %}" style="color: inherit; text-decoration: none;">
+                            {{ post.title }}
+                        </a>
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #555;">By {{ post.author.username }}</p>
+                    <p style="margin-top: 15px;">{{ post.content|truncatechars:120 }}</p>
+                    <a href="{% url 'post_detail' post.id %}" style="color: var(--color-primary); font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 10px;">
+                        Read Full Post &rarr;
+                    </a>
+                </article>
+            {% empty %}
+                <div style="text-align: center; padding: 40px; background: white; border-radius: 8px;">
+                    <p><strong>No posts have been approved yet! Be the first to share.</strong></p>
+                </div>
+            {% endfor %}
+        </div>
         <div style="text-align:center; margin-top: var(--s-4);" class="reveal">
           <a href="approved_posts.html" class="btn btn-outline">See all posts</a>
         </div>

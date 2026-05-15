@@ -52,19 +52,41 @@
     <section class="section-tight">
       <div class="container">
         <div class="filters reveal" role="group" aria-label="Filter posts">
-          <div id="filterChips" role="tablist" aria-label="Category filter" style="display:flex; gap:var(--s-1); flex-wrap:wrap;">
-            <button type="button" class="chip is-active" data-cat="All">All</button>
-            <button type="button" class="chip" data-cat="Films">Films</button>
-            <button type="button" class="chip" data-cat="Theatre Plays">Theatre Plays</button>
-            <button type="button" class="chip" data-cat="Literary Texts">Literary Texts</button>
-            <button type="button" class="chip" data-cat="Clinical Ethics Cases">Clinical Ethics Cases</button>
-            <button type="button" class="chip" data-cat="Ethics News">Ethics News</button>
+          <div div role="tablist" aria-label="Category filter" style="display:flex; gap:var(--s-1); flex-wrap:wrap;">
+            <a href="{% url 'approved_posts' %}" class="chip {% if not request.GET.cat %}is-active{% endif %}" style="text-decoration: none;">All</a>
+            <a href="?cat=Films" class="chip {% if request.GET.cat == 'Films' %}is-active{% endif %}" style="text-decoration: none;">Films</a>
+            <a href="?cat=Theatre Plays" class="chip {% if request.GET.cat == 'Theatre Plays' %}is-active{% endif %}" style="text-decoration: none;">Theatre Plays</a>
+            <a href="?cat=Literary Texts" class="chip {% if request.GET.cat == 'Literary Texts' %}is-active{% endif %}" style="text-decoration: none;">Literary Texts</a>
+            <a href="?cat=Clinical Ethics Cases" class="chip {% if request.GET.cat == 'Clinical Ethics Cases' %}is-active{% endif %}" style="text-decoration: none;">Clinical Ethics Cases</a>
+            <a href="?cat=Ethics News" class="chip {% if request.GET.cat == 'Ethics News' %}is-active{% endif %}" style="text-decoration: none;">Ethics News</a>
           </div>
           <label for="searchInput" class="visually-hidden" style="position:absolute; left:-10000px;">Search posts</label>
-          <input id="searchInput" class="search-input" type="search" placeholder="Search by title, author, or keyword…" aria-label="Search posts">
+          <form method="GET" action="{% url 'approved_posts' %}" style="display: flex; gap: 10px; margin-bottom: 20px;">
+              <input type="search" name="q" placeholder="Search posts..." value="{{ request.GET.q }}" required style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+              <button type="submit" class="btn btn-primary">Search</button>
+              {% if request.GET.q or request.GET.cat %}
+                  <a href="{% url 'approved_posts' %}" class="btn btn-outline">Clear Filters</a>
+              {% endif %}
+          </form>
         </div>
 
-        <div id="approvedPosts" class="posts-grid" aria-live="polite"></div>
+        <div class="posts-grid">
+            {% for post in posts %}
+                <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: white;">
+                    <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); font-weight: bold;">{{ post.category.name }}</span>
+                    <h3 style="margin: 10px 0;">
+                        <a href="{% url 'post_detail' post.id %}" style="color: inherit; text-decoration: none;">{{ post.title }}</a>
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #555;">By {{ post.author.username }}</p>
+                    
+                    <p style="margin-top: 15px;">{{ post.content|truncatechars:100 }}</p>
+                    
+                    <a href="{% url 'post_detail' post.id %}" style="color: var(--color-primary); font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 10px;">Read Full Post &rarr;</a>
+                </div>
+            {% empty %}
+                <p>No approved posts yet. Check back soon!</p>
+            {% endfor %}
+        </div>
       </div>
     </section>
   </main>

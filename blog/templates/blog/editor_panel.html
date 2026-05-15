@@ -44,14 +44,49 @@
     <section class="page-header">
       <div class="container reveal">
         <span class="eyebrow">Editor panel</span>
-        <h1>Review queue <span style="font-family:var(--font-body); font-size:1rem; font-weight:700; color:var(--color-accent); background:var(--color-secondary); padding:6px 14px; border-radius:var(--radius-pill); vertical-align:middle; margin-left:var(--s-1);"><span id="reviewCount">0</span> pending</span></h1>
+        <h1>Review queue <span style="font-family:var(--font-body); font-size:1rem; font-weight:700; color:var(--color-accent); background:var(--color-secondary); padding:6px 14px; border-radius:var(--radius-pill); vertical-align:middle; margin-left:var(--s-1);"><span>{{ posts.count }}</span> pending</span></h1>
         <p>Approve, reject, or preview submissions waiting on editorial review. Approved posts move to the public Browse page; rejected ones stay only with their author.</p>
       </div>
     </section>
 
     <section class="section-tight">
       <div class="container">
-        <div id="reviewList" class="review-list" aria-live="polite"></div>
+        <div class="review-list">
+          {% for post in posts %}
+            <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-bottom: 20px; background-color: white;">
+              <h3 style="margin-top: 0;">{{ post.title }}</h3>
+              <p style="font-size: 0.9rem; color: #555;">
+                <strong>Category:</strong> {{ post.category.name }} | 
+                <strong>Author:</strong> {{ post.author.username }}
+              </p>
+              <p style="margin: 15px 0;">{{ post.content }}</p>
+            
+              {% if post.link %}
+                <p><a href="{{ post.link }}" target="_blank" style="color: var(--color-primary); text-decoration: underline;">View Source Link</a></p>
+              {% endif %}
+
+              <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <form method="POST" style="margin: 0;">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <input type="hidden" name="action" value="approve">
+                    <button type="submit" class="btn btn-primary">Approve</button>
+                </form>
+
+                <form method="POST" style="margin: 0;">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <input type="hidden" name="action" value="reject">
+                    <button type="submit" class="btn btn-outline" style="color: #d9534f; border-color: #d9534f;">Reject</button>
+                </form>
+              </div>
+            </div>
+          {% empty %}
+            <div style="text-align: center; padding: 40px;">
+              <p><strong>No pending posts to review right now! Great job.</strong></p>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </section>
   </main>
