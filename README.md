@@ -90,3 +90,7 @@ The work was divided between two contributors based on the commit history of thi
 - Part 2 — Phase 2: Frontend Setup (templates, layout, static assets)
 - Updated the login functionality and implemented Editor Panel access control
 - Added the project `README.md`
+- Small aesthetic touch-ups and fixes:
+  - Added a category seed migration (`blog/migrations/0002_seed_categories.py`)
+  - Minor adjustment to the initial migration (`blog/migrations/0001_initial.py`)
+  - CSS tweaks in `blog/static/blog/css/styles.css`
