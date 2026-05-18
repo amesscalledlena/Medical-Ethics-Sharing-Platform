@@ -113,7 +113,10 @@ def register_view (request):
         p_word = request.POST.get('password')
         p_word_confirm = request.POST.get('confirm')
 
-        if p_word != p_word_confirm:
+        if not u_name or not p_word or not p_word_confirm:
+            error_message = "Please fill in all required fields to create an account."
+
+        elif p_word != p_word_confirm:
             error_message = "Passwords do not match. Please try again."
 
         elif User.objects.filter(username=u_name).exists():

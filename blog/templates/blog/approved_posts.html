@@ -15,28 +15,28 @@
 
   <header class="navbar" role="banner">
     <div class="container nav-inner">
-      <a href="index.html" class="logo" aria-label="Asclepia home">Asclepia</a>
+      <a href="{% url 'home' %}" class="logo" aria-label="Asclepia home">Asclepia</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="index.html" data-nav="home">Home</a></li>
-          <li><a href="approved_posts.html" data-nav="posts">Browse</a></li>
-          {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html" data-nav="editor">Editor Panel</a></li>{% endif %}
+          <li><a href="{% url 'home' %}" data-nav="home">Home</a></li>
+          <li><a href="{% url 'approved_posts' %}" data-nav="posts">Browse</a></li>
+          {% if user.is_authenticated and user.is_superuser %}<li><a href="{% url 'editor_panel' %}" data-nav="editor">Editor Panel</a></li>{% endif %}
         </ul>
       </nav>
       <div class="nav-cta">
-        {% if user.is_authenticated %}<a href="logout.html" class="btn btn-ghost">Log Out</a>{% else %}<a href="login.html" class="btn btn-ghost">Log In</a>{% endif %}
-        <a href="create_post.html" class="btn btn-primary">Create Post</a>
+        {% if user.is_authenticated %}<a href="{% url 'logout' %}" class="btn btn-ghost">Log Out</a>{% else %}<a href="{% url 'login' %}" class="btn btn-ghost">Log In</a>{% endif %}
+        <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
       </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" hidden>
-      <a href="index.html">Home</a>
-      <a href="approved_posts.html">Browse</a>
-      {% if user.is_authenticated and user.is_superuser %}<a href="editor_panel.html">Editor Panel</a>{% endif %}
-      {% if user.is_authenticated %}<a href="logout.html" class="btn btn-outline">Log Out</a>{% else %}<a href="login.html" class="btn btn-outline">Log In</a>{% endif %}
-      <a href="create_post.html" class="btn btn-primary">Create Post</a>
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'approved_posts' %}">Browse</a>
+      {% if user.is_authenticated and user.is_superuser %}<a href="{% url 'editor_panel' %}">Editor Panel</a>{% endif %}
+      {% if user.is_authenticated %}<a href="{% url 'logout' %}" class="btn btn-outline">Log Out</a>{% else %}<a href="{% url 'login' %}" class="btn btn-outline">Log In</a>{% endif %}
+      <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
     </div>
   </header>
 
@@ -101,20 +101,20 @@
         <div class="footer-col">
           <h4>Categories</h4>
           <ul>
-            <li><a href="approved_posts.html?cat=Films">Films</a></li>
-            <li><a href="approved_posts.html?cat=Theatre+Plays">Theatre Plays</a></li>
-            <li><a href="approved_posts.html?cat=Literary+Texts">Literary Texts</a></li>
-            <li><a href="approved_posts.html?cat=Clinical+Ethics+Cases">Clinical Ethics Cases</a></li>
-            <li><a href="approved_posts.html?cat=Ethics+News">Ethics News</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Films">Films</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Theatre+Plays">Theatre Plays</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Literary+Texts">Literary Texts</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Clinical+Ethics+Cases">Clinical Ethics Cases</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Ethics+News">Ethics News</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Account</h4>
           <ul>
-            {% if user.is_authenticated %}<li><a href="logout.html">Log Out</a></li>{% else %}<li><a href="login.html">Log In</a></li>{% endif %}
-            <li><a href="register.html">Register</a></li>
-            <li><a href="create_post.html">Submit a Post</a></li>
-            {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html">Editor Panel</a></li>{% endif %}
+            {% if user.is_authenticated %}<li><a href="{% url 'logout' %}">Log Out</a></li>{% else %}<li><a href="{% url 'login' %}">Log In</a></li>{% endif %}
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'create_post' %}">Submit a Post</a></li>
+            {% if user.is_authenticated and user.is_superuser %}<li><a href="{% url 'editor_panel' %}">Editor Panel</a></li>{% endif %}
           </ul>
         </div>
         <div class="footer-col">

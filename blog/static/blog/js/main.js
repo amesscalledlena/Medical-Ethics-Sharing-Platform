@@ -244,7 +244,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
 
   /* ---------------- Renderers ---------------- */
   function postCardHTML(post) {
-    const url = `post_detail.html?id=${post.id}`;
+    const url = `/post/${post.id}/`;
     return `
       <a class="post-card reveal" href="${url}" aria-label="Read: ${escapeHTML(post.title)}">
         <span class="post-tag">${escapeHTML(post.category)}</span>
@@ -326,7 +326,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
     }
     document.title = `${post.title} — Asclepia`;
     root.innerHTML = `
-      <a href="approved_posts.html" class="back-link">← Back to all posts</a>
+      <a href="/approved_posts/" class="back-link">← Back to all posts</a>
       <span class="post-tag">${escapeHTML(post.category)}</span>
       <h1>${escapeHTML(post.title)}</h1>
       <div class="meta">
@@ -492,7 +492,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
         success.classList.add('is-visible');
       }
       form.reset();
-      window.setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+      window.setTimeout(() => { window.location.href = '/login/'; }, 1200);
     });
   }
 
@@ -524,7 +524,7 @@ The patient ultimately consented to a modified protocol using bloodless techniqu
         success.textContent = 'Signed in. Redirecting…';
         success.classList.add('is-visible');
       }
-      window.setTimeout(() => { window.location.href = 'index.html'; }, 900);
+      window.setTimeout(() => { window.location.href = '/'; }, 900);
     });
   }
 

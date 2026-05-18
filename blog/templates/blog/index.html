@@ -15,28 +15,28 @@
 
   <header class="navbar" role="banner">
     <div class="container nav-inner">
-      <a href="index.html" class="logo" aria-label="Asclepia home">Asclepia</a>
+      <a href="{% url 'home' %}" class="logo" aria-label="Asclepia home">Asclepia</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="index.html" data-nav="home">Home</a></li>
-          <li><a href="approved_posts.html" data-nav="posts">Browse</a></li>
-          {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html" data-nav="editor">Editor Panel</a></li>{% endif %}
+          <li><a href="{% url 'home' %}" data-nav="home">Home</a></li>
+          <li><a href="{% url 'approved_posts' %}" data-nav="posts">Browse</a></li>
+          {% if user.is_authenticated and user.is_superuser %}<li><a href="{% url 'editor_panel' %}" data-nav="editor">Editor Panel</a></li>{% endif %}
         </ul>
       </nav>
       <div class="nav-cta">
-        {% if user.is_authenticated %}<a href="logout.html" class="btn btn-ghost">Log Out</a>{% else %}<a href="login.html" class="btn btn-ghost">Log In</a>{% endif %}
-        <a href="create_post.html" class="btn btn-primary">Create Post</a>
+        {% if user.is_authenticated %}<a href="{% url 'logout' %}" class="btn btn-ghost">Log Out</a>{% else %}<a href="{% url 'login' %}" class="btn btn-ghost">Log In</a>{% endif %}
+        <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
       </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" hidden>
-      <a href="index.html">Home</a>
-      <a href="approved_posts.html">Browse</a>
-      {% if user.is_authenticated and user.is_superuser %}<a href="editor_panel.html">Editor Panel</a>{% endif %}
-      {% if user.is_authenticated %}<a href="logout.html" class="btn btn-outline">Log Out</a>{% else %}<a href="login.html" class="btn btn-outline">Log In</a>{% endif %}
-      <a href="create_post.html" class="btn btn-primary">Create Post</a>
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'approved_posts' %}">Browse</a>
+      {% if user.is_authenticated and user.is_superuser %}<a href="{% url 'editor_panel' %}">Editor Panel</a>{% endif %}
+      {% if user.is_authenticated %}<a href="{% url 'logout' %}" class="btn btn-outline">Log Out</a>{% else %}<a href="{% url 'login' %}" class="btn btn-outline">Log In</a>{% endif %}
+      <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
     </div>
   </header>
 
@@ -49,8 +49,8 @@
           <h1>A Space for Medical Ethics</h1>
           <p class="lead">Share the films, plays, books, and clinical cases that shape the way you think about consent, dignity, and the obligations of care. Read peer-reviewed reflections from a community committed to the moral weight of medicine.</p>
           <div class="hero-cta">
-            <a href="approved_posts.html" class="btn btn-primary">Browse Materials</a>
-            <a href="create_post.html" class="btn btn-outline">Share a Post</a>
+            <a href="{% url 'approved_posts' %}" class="btn btn-primary">Browse Materials</a>
+            <a href="{% url 'create_post' %}" class="btn btn-outline">Share a Post</a>
           </div>
         </div>
         <div class="hero-illustration reveal" aria-hidden="true">
@@ -82,7 +82,7 @@
         </header>
 
         <div class="cat-grid">
-          <a class="cat-card reveal" href="approved_posts.html?cat=Films">
+          <a class="cat-card reveal" href="{% url 'approved_posts' %}?cat=Films">
             <span class="cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9h4M3 13h4M3 17h4M17 9h4M17 13h4M17 17h4"/></svg>
             </span>
@@ -91,7 +91,7 @@
               <p>Cinema that wrestles with consent, end-of-life, and care.</p>
             </div>
           </a>
-          <a class="cat-card reveal" href="approved_posts.html?cat=Theatre+Plays">
+          <a class="cat-card reveal" href="{% url 'approved_posts' %}?cat=Theatre+Plays">
             <span class="cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c0 5 3 9 7 9s7-4 7-9"/><circle cx="9" cy="10" r="0.8" fill="currentColor"/><circle cx="15" cy="10" r="0.8" fill="currentColor"/><path d="M9 13c0.5 1 1.5 1.5 3 1.5s2.5-0.5 3-1.5"/><path d="M11 16v3M13 16v3"/></svg>
             </span>
@@ -100,7 +100,7 @@
               <p>Drama that holds difficult cases up to the light.</p>
             </div>
           </a>
-          <a class="cat-card reveal" href="approved_posts.html?cat=Literary+Texts">
+          <a class="cat-card reveal" href="{% url 'approved_posts' %}?cat=Literary+Texts">
             <span class="cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>
             </span>
@@ -109,7 +109,7 @@
               <p>Memoirs, essays, and fiction in the medical-humanities canon.</p>
             </div>
           </a>
-          <a class="cat-card reveal" href="approved_posts.html?cat=Clinical+Ethics+Cases">
+          <a class="cat-card reveal" href="{% url 'approved_posts' %}?cat=Clinical+Ethics+Cases">
             <span class="cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a4 4 0 0 0 4 4 4 4 0 0 0 4-4v-2"/><circle cx="18" cy="11" r="2"/></svg>
             </span>
@@ -118,7 +118,7 @@
               <p>De-identified case studies and committee deliberations.</p>
             </div>
           </a>
-          <a class="cat-card reveal" href="approved_posts.html?cat=Ethics+News">
+          <a class="cat-card reveal" href="{% url 'approved_posts' %}?cat=Ethics+News">
             <span class="cat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="1.5"/><path d="M17 8h3v9a2 2 0 0 1-2 2H6"/><path d="M6 9h8M6 12h8M6 15h5"/></svg>
             </span>
@@ -162,7 +162,7 @@
             {% endfor %}
         </div>
         <div style="text-align:center; margin-top: var(--s-4);" class="reveal">
-          <a href="approved_posts.html" class="btn btn-outline">See all posts</a>
+          <a href="{% url 'approved_posts' %}" class="btn btn-outline">See all posts</a>
         </div>
       </div>
     </section>
@@ -179,20 +179,20 @@
         <div class="footer-col">
           <h4>Categories</h4>
           <ul>
-            <li><a href="approved_posts.html?cat=Films">Films</a></li>
-            <li><a href="approved_posts.html?cat=Theatre+Plays">Theatre Plays</a></li>
-            <li><a href="approved_posts.html?cat=Literary+Texts">Literary Texts</a></li>
-            <li><a href="approved_posts.html?cat=Clinical+Ethics+Cases">Clinical Ethics Cases</a></li>
-            <li><a href="approved_posts.html?cat=Ethics+News">Ethics News</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Films">Films</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Theatre+Plays">Theatre Plays</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Literary+Texts">Literary Texts</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Clinical+Ethics+Cases">Clinical Ethics Cases</a></li>
+            <li><a href="{% url 'approved_posts' %}?cat=Ethics+News">Ethics News</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Account</h4>
           <ul>
-            {% if user.is_authenticated %}<li><a href="logout.html">Log Out</a></li>{% else %}<li><a href="login.html">Log In</a></li>{% endif %}
-            <li><a href="register.html">Register</a></li>
-            <li><a href="create_post.html">Submit a Post</a></li>
-            {% if user.is_authenticated and user.is_superuser %}<li><a href="editor_panel.html">Editor Panel</a></li>{% endif %}
+            {% if user.is_authenticated %}<li><a href="{% url 'logout' %}">Log Out</a></li>{% else %}<li><a href="{% url 'login' %}">Log In</a></li>{% endif %}
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'create_post' %}">Submit a Post</a></li>
+            {% if user.is_authenticated and user.is_superuser %}<li><a href="{% url 'editor_panel' %}">Editor Panel</a></li>{% endif %}
           </ul>
         </div>
         <div class="footer-col">

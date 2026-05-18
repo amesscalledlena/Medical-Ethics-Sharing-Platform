@@ -15,7 +15,7 @@
 
   <header class="navbar" role="banner">
     <div class="container nav-inner">
-      <a href="index.html" class="logo" aria-label="Asclepia home">Asclepia</a>
+      <a href="{% url 'home' %}" class="logo" aria-label="Asclepia home">Asclepia</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
           <li><a href="{% url 'home' %}" data-nav="home">Home</a></li>
@@ -33,7 +33,7 @@
     </div>
     <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" hidden>
       <a href="{% url 'home' %}">Home</a>
-      <a href="{% url 'approved_posts' %}"l>Browse</a>
+      <a href="{% url 'approved_posts' %}">Browse</a>
       {% if user.is_authenticated and user.is_superuser %}<a href="{% url 'editor_panel' %}">Editor Panel</a>{% endif %}
       {% if user.is_authenticated %}<a href="{% url 'logout' %}" class="btn btn-outline">Log Out</a>{% else %}<a href="{% url 'login' %}" class="btn btn-outline">Log In</a>{% endif %}
       <a href="{% url 'create_post' %}" class="btn btn-primary">Create Post</a>
